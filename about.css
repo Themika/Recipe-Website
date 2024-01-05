@@ -71,4 +71,13 @@
   
 p{
     color: white;
-}  
+    margin-left: 50px;
+    margin-top: 30px;
+    margin-right: 10px;
+    font-size: large;
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 500px;
+    width: 95%;
+    text-align: center;
+  }  

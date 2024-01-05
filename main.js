@@ -76,7 +76,7 @@ const fetchData = async () => {
     const array = [];
     const searchBar = document.getElementById('searchBar');
     array.push(searchBar.value);
-    array[0] = "banana"; // Not sure why you're setting this to "banana", please adjust as needed.
+    array[0] = "banana"; 
 
     if (array.length === 1) {
       const url = `https://tasty-co.p.rapidapi.com/recipes/search?query=${array[0]}`;
