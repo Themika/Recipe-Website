@@ -71,29 +71,25 @@ const generateCard = async (response) => {
 
 const fetchData = async () => {
   const button = document.getElementById('q');
+  const searchBar = document.getElementById('searchInput');
 
   button.addEventListener('click', async () => {
-    const array = [];
-    const searchBar = document.getElementById('searchBar');
-    array.push(searchBar.value);
-    array[0] = "banana"; 
+    const inputValue = searchBar.value.trim();
 
-    if (array.length === 1) {
-      const url = `https://tasty-co.p.rapidapi.com/recipes/search?query=${array[0]}`;
+    if (inputValue !== '') {
+      const url = `https://tasty-co.p.rapidapi.com/recipes/search?query=${encodeURIComponent(inputValue)}`;
       const options = {
         method: 'GET',
         headers: {
           'X-RapidAPI-Key': '21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7',
-          'X-RapidAPI-Host': 'tasty-co.p.rapidapi.com'
-        }
+          'X-RapidAPI-Host': 'tasty-co.p.rapidapi.com',
+        },
       };
 
       try {
-        if (array.length === 1) {
-          const response = await fetch(url, options);
-          const result = await response.json();
-          generateCard(result);
-        }
+        const response = await fetch(url, options);
+        const result = await response.json();
+        generateCard(result);
       } catch (error) {
         console.error(error);
       }
@@ -104,4 +100,3 @@ const fetchData = async () => {
 document.addEventListener('DOMContentLoaded', () => {
   fetchData();
 });
-
