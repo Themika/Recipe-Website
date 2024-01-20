@@ -6,11 +6,11 @@ const generateCard = async (response) => {
 
     const urlSlug = `https://tasty-co.p.rapidapi.com/recipes/detail?slug=${result.slug}`;
     const slugOptions = {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'X-RapidAPI-Key': '21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7',
-        'X-RapidAPI-Host': 'tasty-co.p.rapidapi.com'
-      }
+        "X-RapidAPI-Key": "21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7",
+        "X-RapidAPI-Host": "tasty-co.p.rapidapi.com",
+      },
     };
 
     try {
@@ -18,18 +18,20 @@ const generateCard = async (response) => {
       const resultSlug = await responseSlug.json();
       console.log(responseSlug);
       // Loop through instructions and concatenate them
-      let instructionsHtml = '';
+      let instructionsHtml = "";
       resultSlug.data.recipe.instructions.forEach((instruction) => {
         instructionsHtml += `<p>${instruction.display_text}</p>`;
       });
-      let ingredientsHtml = '';
-      resultSlug.data.recipe.ingredient_sections.forEach((ingredientSection) => {
-        ingredientsHtml += `<h3>${ingredientSection.name}</h3>`;
-        
-        ingredientSection.ingredients.forEach((ingredient) => {
-          ingredientsHtml += `<h4>${ingredient.name}</h4>`;
-        });
-      });
+      let ingredientsHtml = "";
+      resultSlug.data.recipe.ingredient_sections.forEach(
+        (ingredientSection) => {
+          ingredientsHtml += `<h3>${ingredientSection.name}</h3>`;
+
+          ingredientSection.ingredients.forEach((ingredient) => {
+            ingredientsHtml += `<h4>${ingredient.name}</h4>`;
+          });
+        }
+      );
       const foodCard = `
         <div class="card">
           <div class="left-side">
@@ -67,22 +69,22 @@ const generateCard = async (response) => {
   }
 };
 
-
-
 const fetchData = async () => {
-  const button = document.getElementById('q');
-  const searchBar = document.getElementById('searchInput');
+  const button = document.getElementById("q");
+  const searchBar = document.getElementById("searchInput");
 
-  button.addEventListener('click', async () => {
+  button.addEventListener("click", async (e) => {
+    e.preventDefault();
     const inputValue = searchBar.value.trim();
 
-    if (inputValue !== '') {
-      const url = `https://tasty-co.p.rapidapi.com/recipes/search?query=${encodeURIComponent(inputValue)}`;
+    if (inputValue !== "") {
+      const url = `https://tasty-co.p.rapidapi.com/recipes/search?query=${inputValue}`;
       const options = {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'X-RapidAPI-Key': '21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7',
-          'X-RapidAPI-Host': 'tasty-co.p.rapidapi.com',
+          "X-RapidAPI-Key":
+            "21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7",
+          "X-RapidAPI-Host": "tasty-co.p.rapidapi.com",
         },
       };
 
@@ -97,6 +99,6 @@ const fetchData = async () => {
   });
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   fetchData();
 });
