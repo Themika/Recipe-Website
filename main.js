@@ -7,7 +7,7 @@ const generateCard = async (response) => {
     const slugOptions = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7", // use your own api key from rapidapi Tasty-Co
+        "X-RapidAPI-Key": "", // use your own api key from rapidapi Tasty-Co
         "X-RapidAPI-Host": "tasty-co.p.rapidapi.com",
       },
     };
@@ -86,8 +86,7 @@ const fetchData = async () => {
       const options = {
         method: "GET",
         headers: {
-          "X-RapidAPI-Key":
-            "21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7", // use your own api key from rapidapi Tasty-Co
+          "X-RapidAPI-Key": "", // use your own api key from rapidapi Tasty-Co
           "X-RapidAPI-Host": "tasty-co.p.rapidapi.com",
         },
       };
