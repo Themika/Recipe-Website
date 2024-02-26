@@ -32,20 +32,18 @@
       </form>
     </div>
     <script>
-      function openPopUp() {
-        const popUpElement = document.getElementById("popup");
-
-        // Make sure to check if the element is not null before accessing its classList
+      function openPopUp(popUpId) {
+        const popUpElement = document.getElementById(popUpId);
         if (popUpElement) {
           popUpElement.style.visibility = "visible";
           popUpElement.style.transform = "translate(-50%, 100%) scale(1)";
-          popUpElement.style.transition = "transfrom 0.4s, top 0.4s";
+          popUpElement.style.transition = "transform 0.4s, top 0.4s"; // Corrected spelling here
         }
       }
-      function closePopUp() {
-        const popUpElement = document.getElementById("popup");
 
-        // Make sure to check if the element is not null before accessing its classList
+      // Function to close a specific pop-up by ID
+      function closePopUp(popUpId) {
+        const popUpElement = document.getElementById(popUpId);
         if (popUpElement) {
           popUpElement.style.visibility = "hidden";
           popUpElement.style.transform = "translate(-50%, 100%) scale(1)";

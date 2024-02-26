@@ -1,5 +1,4 @@
 import "./style.css";
-
 const generateCard = async (response) => {
   for (let i = 0; i < 6; i++) {
     const result = response.data[i];
@@ -8,7 +7,7 @@ const generateCard = async (response) => {
     const slugOptions = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7",
+        "X-RapidAPI-Key": "", // use your own api key from rapidapi Tasty-Co
         "X-RapidAPI-Host": "tasty-co.p.rapidapi.com",
       },
     };
@@ -16,12 +15,16 @@ const generateCard = async (response) => {
     try {
       const responseSlug = await fetch(urlSlug, slugOptions);
       const resultSlug = await responseSlug.json();
-      console.log(responseSlug);
+
+      // Generate unique IDs for pop-ups
+      const popUpId = `popup${i}`;
+
       // Loop through instructions and concatenate them
       let instructionsHtml = "";
       resultSlug.data.recipe.instructions.forEach((instruction) => {
         instructionsHtml += `<p>${instruction.display_text}</p>`;
       });
+
       let ingredientsHtml = "";
       resultSlug.data.recipe.ingredient_sections.forEach(
         (ingredientSection) => {
@@ -32,32 +35,33 @@ const generateCard = async (response) => {
           });
         }
       );
+
       const foodCard = `
         <div class="card">
           <div class="left-side">
             <img src="${result.thumb_big}" id="productimage" alt="">
             <h2>${result.name}</h2>
-            <button type="submit" class="btn" onclick="openPopUp()">Read More</button>
-            <div class="pop-up" id="popup">
-            <header>
-            <h3>Description</h3>
-            <p>${resultSlug.data.recipe.description}</p>
-            </header>
-            <section>
-            <h3>Ingredients</h3>
-            ${ingredientsHtml}
-            </section>
-            <aside>
-            <h3>Instructions</h3>
-            ${instructionsHtml}
-            </aside>
-            <main>
-            <img src = "${resultSlug.data.recipe.thumb_big}">
-            </main>
-            <footer>
-            <button onclick="closePopUp()">Close</button>
-            </footer>
-          </div>
+            <button type="submit" class="btn" onclick="openPopUp('${popUpId}')">Read More</button>
+            <div class="pop-up" id="${popUpId}">
+              <header>
+                <h3>Description</h3>
+                <p>${resultSlug.data.recipe.description}</p>
+              </header>
+              <section>
+                <h3>Ingredients</h3>
+                ${ingredientsHtml}
+              </section>
+              <aside>
+                <h3>Instructions</h3>
+                ${instructionsHtml}
+              </aside>
+              <main>
+                <img src="${resultSlug.data.recipe.thumb_big}">
+              </main>
+              <footer>
+                <button onclick="closePopUp('${popUpId}')">Close</button>
+              </footer>
+            </div>
           </div>
         </div>
       `;
@@ -82,8 +86,7 @@ const fetchData = async () => {
       const options = {
         method: "GET",
         headers: {
-          "X-RapidAPI-Key":
-            "21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7",
+          "X-RapidAPI-Key": "", // use your own api key from rapidapi Tasty-Co
           "X-RapidAPI-Host": "tasty-co.p.rapidapi.com",
         },
       };
