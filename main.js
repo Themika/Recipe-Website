@@ -80,7 +80,6 @@ const fetchData = async () => {
   button.addEventListener("click", async (e) => {
     e.preventDefault();
     const inputValue = searchBar.value.trim();
-    count++;
     if (inputValue !== "") {
       const url = `https://tasty-co.p.rapidapi.com/recipes/search?query=${inputValue}`;
       const options = {
