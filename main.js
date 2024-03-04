@@ -7,7 +7,7 @@ const generateCard = async (response) => {
     const slugOptions = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "", // use your own api key from rapidapi Tasty-Co
+        "X-RapidAPI-Key": "21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7", // use your own api key from rapidapi Tasty-Co
         "X-RapidAPI-Host": "tasty-co.p.rapidapi.com",
       },
     };
@@ -31,7 +31,11 @@ const generateCard = async (response) => {
           ingredientsHtml += `<h3>${ingredientSection.name}</h3>`;
 
           ingredientSection.ingredients.forEach((ingredient) => {
-            ingredientsHtml += `<h4>${ingredient.name}</h4>`;
+            if (ingredient.primary_unit.quantity != null) {
+              ingredientsHtml += `<h4> ${ingredient.primary_unit.quantity} ${ingredient.primary_unit.display} ${ingredient.name}  </h4>`;
+            } else {
+              ingredientsHtml += `<h4> ${ingredient.metric_unit.quantity} ${ingredient.metric_unit.display} </h4>`;
+            }
           });
         }
       );
@@ -85,7 +89,8 @@ const fetchData = async () => {
       const options = {
         method: "GET",
         headers: {
-          "X-RapidAPI-Key": "", // use your own api key from rapidapi Tasty-Co
+          "X-RapidAPI-Key":
+            "21c98ce353msh2e77624f518ce0bp1fb9f3jsn84b6d813ebd7", // use your own api key from rapidapi Tasty-Co
           "X-RapidAPI-Host": "tasty-co.p.rapidapi.com",
         },
       };
